@@ -12,10 +12,6 @@
         <sonar.sources></sonar.sources>
         <sonar.tests></sonar.tests>
         <sonar.java.binaries>target</sonar.java.binaries>
-<<<<<<< HEAD
-=======
-        <java.version>11</java.version>
->>>>>>> Oracle-Workspace-Shwethadgr8
     </properties>
     <dependencies>
         <dependency>
@@ -33,7 +29,6 @@
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>3.7.0.1746</version>
                 </plugin>
-                
             </plugins>
         </pluginManagement>
     </build>
