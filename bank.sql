@@ -1,1 +1,0 @@
-create table banking( name varchar2(10));
