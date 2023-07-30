@@ -1,3 +1,5 @@
+set serveroutput on;
+
 CREATE VIEW BANKING_VIEW AS
 SELECT EXTRACT(YEAR FROM "DATE") AS Bank_Year,
        CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, '[^0-9.]', '') AS NUMBER) AS Total_Amount
