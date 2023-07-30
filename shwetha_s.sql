@@ -1,6 +1,6 @@
 CREATE VIEW BANKING_VIEW AS
 SELECT EXTRACT(YEAR FROM "DATE") AS Year,
-       CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, '[^0-9.]', '') AS NUMBER) AS WithdrawalAmtCleaned
+       CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, '[^0-9.]', '') AS NUMBER) AS Total_Amount
 FROM BANK_TRANSACTION
 WHERE WITHDRAWAL_AMT IS NOT NULL;
 
@@ -16,7 +16,7 @@ BANK_TRANSACTION ("DATE", WITHDRAWAL_AMT);*/
 
 
 SELECT Year,
-       MAX(WithdrawalAmtCleaned) AS HighestAmountDebited
+       Max(Total_Amount) AS High_Amount;
 FROM BANKING_VIEW
 GROUP BY Year;
 
@@ -25,7 +25,7 @@ GROUP BY Year;
 
 
 SELECT Year,
-       MIN(WithdrawalAmtCleaned) AS LowestAmountDebited
+       MIN(Total_Amount) AS Low_Amount;
 FROM BANKING_VIEW
 GROUP BY Year;
 
@@ -36,8 +36,8 @@ GROUP BY Year;
 
 SELECT Year, FifthHighestAmount
 FROM (
-  SELECT Year, WithdrawalAmtCleaned AS FifthHighestAmount,
-         DENSE_RANK() OVER (PARTITION BY Year ORDER BY WithdrawalAmtCleaned DESC) AS R
+  SELECT Year, Total_Amount AS Fifth_High_Amount,
+         DENSE_RANK() OVER (PARTITION BY Year ORDER BY Total_Amount DESC) AS R
   FROM BANKING_VIEW
 )
 WHERE R = 5;
@@ -47,7 +47,7 @@ WHERE R = 5;
 -- Query 4: Count of Withdrawal Transactions between May 5, 2018, and March 7, 2019
 
 
-SELECT COUNT(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, '[^0-9.]', '') AS NUMBER)) AS WithdrawalCount
+SELECT COUNT(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, '[^0-9.]', '') AS NUMBER)) AS Withdraw_Count
 FROM WITHDRAW_A
 WHERE "DATE" BETWEEN TO_DATE('05-05-2018', 'DD-MM-YYYY') AND TO_DATE('07-03-2019', 'DD-MM-YYYY');
 
@@ -56,8 +56,8 @@ WHERE "DATE" BETWEEN TO_DATE('05-05-2018', 'DD-MM-YYYY') AND TO_DATE('07-03-2019
 -- Query 5: Top 5 Largest Withdrawal Amounts for the year 2018
 
 
-SELECT DISTINCT Year, WithdrawalAmtCleaned AS LargestWithdrawal
+SELECT DISTINCT Year, Total_Amount AS Large_Withdrawal
 FROM BANKING_VIEW
 WHERE Year = 2018
-ORDER BY WithdrawalAmtCleaned DESC
+ORDER BY Total_Amount DESC
 FETCH FIRST 5 ROWS ONLY;
