@@ -55,7 +55,7 @@ WHERE "DATE" BETWEEN TO_DATE('05-05-2018', 'DD-MM-YYYY') AND TO_DATE('07-03-2019
 
 
 
--- Query 5: Top 5 Largest Withdrawal Amounts for the year 2018
+-- Query 5:  Top 5 Largest Withdrawal Amounts for the year 2018
 
 
 SELECT DISTINCT Bank_Year, Total_Amount AS Large_Withdrawal
