@@ -6,8 +6,6 @@ SELECT EXTRACT(YEAR FROM "DATE") AS Year,
 FROM BANK_TRANSACTION
 WHERE WITHDRAWAL_AMT IS NOT NULL;
 
-
-
 CREATE VIEW WITHDRAW_R AS
 SELECT "DATE", WITHDRAWAL_AMT
 FROM BANK_TRANSACTION;
@@ -31,7 +29,6 @@ FROM BANK_SYSTEM_VIEW
 GROUP BY Year;
 
 
-
 -- Query 3: Fifth Highest Amount Debited per Year
 
 SELECT Year, FifthHighestAmount
@@ -43,14 +40,11 @@ FROM (
 WHERE R = 5;
 
 
-
 -- Query 4: Count of Withdrawal Transactions between May 5, 2018, and March 7, 2019
 
 SELECT COUNT(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, '[^0-9.]', '') AS NUMBER)) AS WithdrawalCount
 FROM WITHDRAW_R
 WHERE "DATE" BETWEEN TO_DATE('05-05-2018', 'DD-MM-YYYY') AND TO_DATE('07-03-2019', 'DD-MM-YYYY');
-
-
 
 -- Query 5: Top 5 Largest Withdrawal Amounts for the year 2018
 
