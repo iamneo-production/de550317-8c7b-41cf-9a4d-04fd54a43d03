@@ -1,7 +1,7 @@
 VARIABLE MY_CONSTANT VARCHAR2(10);
 EXEC :MY_CONSTANT:='[^0-9.]';
 
--- Query 1: Highest Amount Debited per year
+-- Query 1: Highest Amount Debited per YEAR
 
 SELECT EXTRACT(YEAR FROM "DATE") AS YEAR,
 MAX(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT,:MY_CONSTANT,'') AS NUMBER)) AS HighestDebiteddAmount
