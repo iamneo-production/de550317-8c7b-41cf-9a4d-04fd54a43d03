@@ -1,6 +1,7 @@
 VARIABLE MY_CONSTANT VARCHAR2(10);
 EXEC :MY_CONSTANT:='[^0-9.]';
 
+
 -- Query 1: Highest Amount Debited per year
 
 SELECT EXTRACT(YEAR FROM "DATE") AS YEAR,
