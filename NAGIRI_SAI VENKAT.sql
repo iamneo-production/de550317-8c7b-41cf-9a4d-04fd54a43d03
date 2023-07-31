@@ -1,7 +1,8 @@
 VARIABLE MY_CONSTANT VARCHAR2(10);
 EXEC :MY_CONSTANT := '[^0-9.]';
 
--- Query 1: Highest Amount Debited per year
+
+-- Query 1: Highest Amount Debited per Year
 SELECT EXTRACT(YEAR FROM "DATE") AS YEAR,
 MAX(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, :MY_CONSTANT, '') AS NUMBER)) AS HighestDebitedAmount
 FROM BANK_TRANSACTION
@@ -9,7 +10,8 @@ WHERE WITHDRAWAL_AMT IS NOT NULL
 GROUP BY EXTRACT(YEAR FROM "DATE") 
 ORDER BY EXTRACT(YEAR FROM "DATE") ASC;
 
--- Query 2: Lowest Amount Debited per year
+
+-- Query 2: Lowest Amount Debited per Year
 SELECT EXTRACT(YEAR FROM "DATE") AS YEAR,
 MIN(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, :MY_CONSTANT, '') AS NUMBER)) AS LowestDebitedAmount
 FROM BANK_TRANSACTION
@@ -17,7 +19,8 @@ WHERE WITHDRAWAL_AMT IS NOT NULL
 GROUP BY EXTRACT(YEAR FROM "DATE") 
 ORDER BY EXTRACT(YEAR FROM "DATE") ASC;
 
--- Query 3: Fifth Highest Amount Debited per year
+
+-- Query 3: Fifth Highest Amount Debited per Year
 SELECT Year, FifthHighestAmount
 FROM (
     SELECT EXTRACT(YEAR FROM "DATE") AS Year,
@@ -28,10 +31,12 @@ FROM (
 )
 WHERE R = 5;
 
+
 -- Query 4: Count of Withdrawal Transactions between May 5, 2018, and March 7, 2019
 SELECT COUNT(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, :MY_CONSTANT, '') AS NUMBER)) AS Withdrawal_Count
 FROM BANK_TRANSACTION
 WHERE "DATE" BETWEEN TO_DATE('05-05-2018', 'DD-MM-YYYY') AND TO_DATE('07-03-2019', 'DD-MM-YYYY');
+
 
 -- Query 5: Top 5 Largest Withdrawal Amounts for the year 2018
 SELECT DISTINCT EXTRACT(YEAR FROM "DATE") AS Year,
