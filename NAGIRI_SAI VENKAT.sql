@@ -1,7 +1,7 @@
 VARIABLE MY_CONSTANT VARCHAR2(10);
 EXEC :MY_CONSTANT:='[^0-9.]';
 
--- Query 1: Highest Amount Debited per Year
+-- Query 1: Highest Amount Debited per year
 
 SELECT EXTRACT(YEAR FROM "DATE") AS YEAR,
 MAX(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT,:MY_CONSTANT,'') AS NUMBER)) AS HighestDebiteddAmount
@@ -10,7 +10,7 @@ WHERE WITHDRAWAL_AMT IS NOT NULL
 GROUP BY EXTRACT(YEAR FROM "DATE") 
 ORDER BY EXTRACT(YEAR FROM "DATE") ASC;
 
--- Query 2: Lowest Amount Debited per Year
+-- Query 2: Lowest Amount Debited per year
 
 SELECT EXTRACT(YEAR FROM "DATE") AS YEAR,
 MIN(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT,:MY_CONSTANT,'') AS NUMBER)) AS LowestDebitedAmount
@@ -19,7 +19,7 @@ WHERE WITHDRAWAL_AMT IS NOT NULL
 GROUP BY EXTRACT(YEAR FROM "DATE") 
 ORDER BY EXTRACT(YEAR FROM "DATE") ASC;
 
--- Query 3: Fifth Highest Amount Debited per Year
+-- Query 3: Fifth Highest Amount Debited per year
 
 
 SELECT Year,FifthHighestAmount
