@@ -1,4 +1,5 @@
 set serveroutput on;
+
 CREATE VIEW BANKINGS1_VIEW AS
 SELECT EXTRACT(YEAR FROM "DATE") AS Bank_Year,
        CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, '[^0-9.]', '') AS NUMBER) AS Total_Amount
@@ -9,6 +10,7 @@ CREATE VIEW WITHDRAW1_A1 AS
 SELECT "DATE", WITHDRAWAL_AMT
 FROM BANK_TRANSACTION;
 
+
 -- Query 1: Highest Amount Debited per Year
 
 SELECT Bank_Year,
@@ -16,12 +18,14 @@ SELECT Bank_Year,
 FROM BANKINGS1_VIEW
 GROUP BY Bank_Year;
 
+
 -- Query 2: Lowest Amount Debited per Year
 
 SELECT Bank_Year,
        MIN(Total_Amount) AS Low_Amount;
 FROM BANKINGS1_VIEW
 GROUP BY Bank_Year;
+
 
 -- Query 3: Fifth Highest Amount Debited per Year
 
@@ -33,11 +37,13 @@ FROM (
 )
 WHERE Z = 5;
 
+
 -- Query 4: Count of Withdrawal Transactions between May 5, 2018, and March 7, 2019
 
 SELECT COUNT(CAST(REGEXP_REPLACE(WITHDRAWAL_AMT, '[^0-9.]', '') AS NUMBER)) AS Withdraw_Count
 FROM WITHDRAW1_A1
 WHERE "DATE" BETWEEN TO_DATE('05-05-2018', 'DD-MM-YYYY') AND TO_DATE('07-03-2019', 'DD-MM-YYYY');
+
 
 -- Query 5: Top 5 Largest Withdrawal Amounts for the year 2018
 
